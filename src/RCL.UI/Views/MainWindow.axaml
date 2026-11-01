@@ -1,0 +1,406 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="RCL.UI.Views.MainWindow"
+        Title="Rainclouds Minecraft Launcher 社区版"
+        Width="1060" Height="720" MinWidth="900" MinHeight="620"
+        Background="#ffffff">
+
+  <DockPanel>
+    <!-- ================= 顶栏 ================= -->
+    <Border DockPanel.Dock="Top" Background="#14161c" Padding="16,10">
+      <Grid ColumnDefinitions="Auto,*,Auto,12,Auto,12,Auto">
+        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+          <Border Width="30" Height="30" CornerRadius="9" Background="#1f6feb">
+            <TextBlock Text="&#9729;" FontSize="17" Foreground="White"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <TextBlock Text="Rainclouds" FontSize="17" FontWeight="Bold" Foreground="#ffffff"
+                     VerticalAlignment="Center"/>
+          <Border Background="#23262f" CornerRadius="5" Padding="6,2" VerticalAlignment="Center">
+            <TextBlock Text="社区版 v1.2" FontSize="10" Foreground="#9aa3b2"/>
+          </Border>
+        </StackPanel>
+
+        <!-- 账号按钮（点击打开账号管理） -->
+        <Button Grid.Column="2" x:Name="BtnAccount" Background="#23262f" BorderThickness="0"
+                Padding="8,5" CornerRadius="8">
+          <StackPanel Orientation="Horizontal" Spacing="9">
+            <Panel Width="26" Height="26">
+              <Border CornerRadius="13" Background="{Binding AccountBrush}" IsVisible="{Binding HasNoCurrentHead}">
+                <TextBlock Text="{Binding AccountInitial}" Foreground="White" FontSize="12" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <Border CornerRadius="13" ClipToBounds="True" IsVisible="{Binding HasCurrentHead}">
+                <Image Source="{Binding CurrentHead}" Stretch="UniformToFill"/>
+              </Border>
+            </Panel>
+            <StackPanel VerticalAlignment="Center" Spacing="0">
+              <TextBlock Text="{Binding AccountLabel}" Foreground="#ffffff" FontSize="12" FontWeight="SemiBold"/>
+              <TextBlock Text="{Binding AccountTypeLabel}" Foreground="#8b93a3" FontSize="10"/>
+            </StackPanel>
+            <TextBlock Text="&#9662;" Foreground="#8b93a3" VerticalAlignment="Center" FontSize="11"/>
+          </StackPanel>
+        </Button>
+
+        <Button Grid.Column="4" x:Name="BtnLicense" Content="{Binding LicenseText}"
+                Background="#2a2d37" Foreground="#c9d1df" BorderThickness="0"
+                Padding="12,7" CornerRadius="8" FontSize="11"/>
+        <Button Grid.Column="6" x:Name="BtnModules" Content="{Binding ModulesText}"
+                Background="#2a2d37" Foreground="#c9d1df" BorderThickness="0"
+                Padding="12,7" CornerRadius="8" FontSize="11"/>
+      </Grid>
+    </Border>
+
+    <!-- ================= 底部启动区 ================= -->
+    <Border DockPanel.Dock="Bottom" Background="#f6f7f9" BorderBrush="#e3e6eb" BorderThickness="0,1,0,0">
+      <StackPanel Margin="16,12" Spacing="8">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+          <Button x:Name="BtnPlay" Content="启动游戏" FontSize="15" FontWeight="Bold"
+                  Background="#2ea043" Foreground="White" Padding="30,9" CornerRadius="8"/>
+          <StackPanel Grid.Column="1" Margin="16,0" VerticalAlignment="Center" Spacing="4">
+            <TextBlock Text="{Binding ProgressText}" FontSize="11" Foreground="#5b6472"/>
+            <ProgressBar x:Name="ProgBar" Minimum="0" Maximum="100" Height="6"
+                         Value="{Binding ProgressValue}" Foreground="#2ea043"/>
+          </StackPanel>
+          <Button Grid.Column="2" x:Name="BtnToggleLog" Content="日志" Padding="14,7" CornerRadius="8"/>
+        </Grid>
+
+        <TextBox x:Name="TxtLog" Text="{Binding LogText}" IsReadOnly="True" Height="132" IsVisible="False"
+                 FontFamily="Consolas" FontSize="11" TextWrapping="NoWrap" AcceptsReturn="True"
+                 Background="#16181d" Foreground="#c9d1df" BorderThickness="0" CornerRadius="6"
+                 Padding="10,8"/>
+      </StackPanel>
+    </Border>
+
+    <!-- ================= 主体 ================= -->
+    <Grid ColumnDefinitions="250,*">
+
+      <!-- 实例列表 -->
+      <Border Grid.Column="0" Background="#fafbfc" BorderBrush="#e3e6eb" BorderThickness="0,0,1,0">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top" Margin="12,14,12,8" Spacing="8">
+            <TextBlock Text="实例" FontSize="11" FontWeight="Bold" Foreground="#8a93a3"/>
+            <Grid ColumnDefinitions="*,6,Auto">
+              <Button x:Name="BtnNewInstance" Content="+ 新建实例" HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Center" Padding="0,7" CornerRadius="7"
+                      Background="#1f6feb" Foreground="White" BorderThickness="0"/>
+              <Button Grid.Column="2" x:Name="BtnCore" Content="核心" Padding="10,7" CornerRadius="7"
+                      Background="#e8f0ff" Foreground="#1f6feb" ToolTip.Tip="一键创建内置 Rainclouds 核心实例"/>
+            </Grid>
+          </StackPanel>
+
+          <Border DockPanel.Dock="Bottom" BorderBrush="#e3e6eb" BorderThickness="0,1,0,0" Padding="12,8">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <Button x:Name="BtnOpenInstance" Content="打开文件夹" FontSize="11" Padding="8,4"/>
+              <Button x:Name="BtnDeleteProfile" Content="删除" FontSize="11" Padding="8,4"/>
+            </StackPanel>
+          </Border>
+
+          <ListBox x:Name="LstProfiles" ItemsSource="{Binding Profiles}" Background="Transparent"
+                   BorderThickness="0" Padding="6">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Grid ColumnDefinitions="Auto,*,Auto" Margin="2,3">
+                  <Border Width="34" Height="34" CornerRadius="8" Background="#5b6472">
+                    <TextBlock Text="{Binding Initial}" Foreground="White" FontWeight="Bold" FontSize="15"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Border>
+                  <StackPanel Grid.Column="1" Margin="9,0,8,0" VerticalAlignment="Center" Spacing="1">
+                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="13"
+                               TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="{Binding Subtitle}" FontSize="10.5" Foreground="#8a93a3"
+                               TextTrimming="CharacterEllipsis"/>
+                  </StackPanel>
+                  <Border Grid.Column="2" Background="#e8f0ff" CornerRadius="9" Padding="6,1"
+                          VerticalAlignment="Center" IsVisible="{Binding IsRaincloudsCore}">
+                    <TextBlock Text="核心" FontSize="9" Foreground="#1f6feb"/>
+                  </Border>
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DockPanel>
+      </Border>
+
+      <!-- 右侧标签页 -->
+      <TabControl Grid.Column="1" x:Name="Tabs" Padding="0" BorderThickness="0">
+
+        <!-- 概览 -->
+        <TabItem Header="概览">
+          <ScrollViewer>
+            <StackPanel Margin="24,20" Spacing="16">
+              <StackPanel Orientation="Horizontal" Spacing="16">
+                <Border Width="64" Height="64" CornerRadius="14" Background="#1f6feb">
+                  <TextBlock Text="{Binding ProfileIcon}" Foreground="White" FontSize="26" FontWeight="Bold"
+                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel VerticalAlignment="Center" Spacing="4">
+                  <TextBlock Text="{Binding ProfileTitle}" FontSize="22" FontWeight="Bold"/>
+                  <TextBlock Text="{Binding ProfileSubtitle}" FontSize="12" Foreground="#6b7484"/>
+                </StackPanel>
+              </StackPanel>
+
+              <Grid ColumnDefinitions="*,12,*">
+                <Border Background="#f6f7f9" CornerRadius="10" Padding="16">
+                  <StackPanel Spacing="10">
+                    <TextBlock Text="快速操作" FontWeight="Bold" FontSize="13"/>
+                    <Button x:Name="BtnOpenMods" BorderBrush="#d8dee6" Background="#ffffff" Content="打开模组文件夹" HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center" Padding="0,7"/>
+                    <Button x:Name="BtnOpenGameDir" BorderBrush="#d8dee6" Background="#ffffff" Content="打开游戏目录" HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center" Padding="0,7"/>
+                    <Button x:Name="BtnProvisionCore" BorderBrush="#d8dee6" Background="#ffffff" Content="补齐核心模组" HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center" Padding="0,7"/>
+                  </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Background="#f6f7f9" CornerRadius="10" Padding="16">
+                  <StackPanel Spacing="9">
+                    <TextBlock Text="实例信息" FontWeight="Bold" FontSize="13"/>
+                    <Grid ColumnDefinitions="80,*">
+                      <TextBlock Text="游戏版本" FontSize="12" Foreground="#6b7484"/>
+                      <TextBlock Grid.Column="1" Text="{Binding SelectedProfile.GameVersion}" FontSize="12"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="80,*">
+                      <TextBlock Text="加载器" FontSize="12" Foreground="#6b7484"/>
+                      <TextBlock Grid.Column="1" Text="{Binding SelectedProfile.LoaderLabel}" FontSize="12"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="80,*">
+                      <TextBlock Text="内存" FontSize="12" Foreground="#6b7484"/>
+                      <TextBlock Grid.Column="1" Text="{Binding SelectedProfile.MemoryText}" FontSize="12"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="80,*">
+                      <TextBlock Text="模组" FontSize="12" Foreground="#6b7484"/>
+                      <TextBlock Grid.Column="1" Text="{Binding ModSummary}" FontSize="12"/>
+                    </Grid>
+                  </StackPanel>
+                </Border>
+              </Grid>
+
+              <Border Background="#eef4ff" CornerRadius="10" Padding="14">
+                <StackPanel Spacing="6">
+                  <TextBlock Text="模组与插件可以共存" FontWeight="Bold" FontSize="12" Foreground="#12408f"/>
+                  <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#2b4d86"
+                             Text="每个实例都有独立的 mods、config、saves 目录：同一台电脑上可以同时装原版、Fabric 生存、Forge 科技包，互不影响。服务端插件（Bukkit/Spigot/Paper）放在服务端的 plugins 目录，客户端启动器可以识别并管理这些 jar。"/>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </ScrollViewer>
+        </TabItem>
+
+        <!-- 模组 -->
+        <TabItem Header="模组 / 插件">
+          <DockPanel Margin="18,14">
+            <StackPanel DockPanel.Dock="Top" Spacing="10">
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Text="{Binding ModSummary}" FontSize="12" Foreground="#6b7484" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                  <Button x:Name="BtnAddMod" Content="添加文件" Padding="12,6" Background="#1f6feb" Foreground="White"/>
+                  <Button x:Name="BtnRefreshMods" BorderBrush="#d8dee6" Background="#ffffff" Content="刷新" Padding="12,6"/>
+                  <Button x:Name="BtnDeleteMod" BorderBrush="#d8dee6" Background="#ffffff" Content="删除" Padding="12,6"/>
+                  <Button x:Name="BtnOpenMods2" BorderBrush="#d8dee6" Background="#ffffff" Content="打开目录" Padding="12,6"/>
+                </StackPanel>
+              </Grid>
+              <TextBlock FontSize="11" Foreground="#8a93a3"
+                         Text="勾选即启用，取消勾选即禁用（文件保留为 .disabled，不会删除）。支持 Fabric / Forge / Quilt 模组与 Bukkit 插件 jar。"/>
+            </StackPanel>
+
+            <ListBox x:Name="LstMods" ItemsSource="{Binding Mods}" Margin="0,10,0,0"
+                     Background="#ffffff" BorderBrush="#e3e6eb" BorderThickness="1" CornerRadius="8">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Grid ColumnDefinitions="Auto,*,Auto,70" Margin="2,4">
+                    <CheckBox IsChecked="{Binding Enabled}" VerticalAlignment="Center"/>
+                    <StackPanel Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" Spacing="1">
+                      <TextBlock Text="{Binding DisplayName}" FontSize="13" FontWeight="SemiBold"/>
+                      <TextBlock Text="{Binding SubText}" FontSize="10.5" Foreground="#8a93a3"/>
+                    </StackPanel>
+                    <Border Grid.Column="2" Background="#f0f2f5" CornerRadius="9" Padding="7,1"
+                            VerticalAlignment="Center" Margin="0,0,10,0">
+                      <TextBlock Text="{Binding Loader}" FontSize="9.5" Foreground="#5b6472"/>
+                    </Border>
+                    <TextBlock Grid.Column="3" Text="{Binding SizeText}" FontSize="10.5"
+                               Foreground="#8a93a3" VerticalAlignment="Center"/>
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </DockPanel>
+        </TabItem>
+
+        <!-- 设置 -->
+        <TabItem Header="设置">
+          <ScrollViewer>
+            <StackPanel Margin="24,18" Spacing="14">
+
+              <TextBlock Text="实例设置" FontWeight="Bold" FontSize="14"/>
+
+              <Grid ColumnDefinitions="110,*" >
+                <TextBlock Text="名称" VerticalAlignment="Center" FontSize="12"/>
+                <TextBox Grid.Column="1" x:Name="TxtName" Width="320" HorizontalAlignment="Left"/>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*,Auto">
+                <TextBlock Text="游戏版本" VerticalAlignment="Center" FontSize="12"/>
+                <ComboBox Grid.Column="1" x:Name="CmbVersion" Width="220" HorizontalAlignment="Left"
+                          ItemsSource="{Binding VersionOptions}"/>
+                <Button Grid.Column="2" x:Name="BtnRefreshVersions" Content="刷新" Padding="12,4"/>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*,Auto">
+                <TextBlock Text="加载器" VerticalAlignment="Center" FontSize="12"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                  <ComboBox x:Name="CmbLoader" Width="140" SelectedIndex="0">
+                    <ComboBoxItem Content="原版 Vanilla"/>
+                    <ComboBoxItem Content="Fabric"/>
+                    <ComboBoxItem Content="Forge"/>
+                    <ComboBoxItem Content="Quilt"/>
+                  </ComboBox>
+                  <TextBox x:Name="TxtLoaderVersion" Width="210" Watermark="加载器版本，留空=最新"/>
+                  <Button x:Name="BtnLatestLoader" Content="取最新" Padding="10,4"/>
+                </StackPanel>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*">
+                <TextBlock Text="内存 (MB)" VerticalAlignment="Center" FontSize="12"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                  <TextBlock Text="最小" VerticalAlignment="Center" FontSize="12"/>
+                  <NumericUpDown x:Name="NumMinMem" Width="128" Minimum="512" Maximum="65536"
+                                 Increment="256" Value="2048" FormatString="0" ShowButtonSpinner="False"/>
+                  <TextBlock Text="最大" VerticalAlignment="Center" FontSize="12"/>
+                  <NumericUpDown x:Name="NumMaxMem" Width="128" Minimum="1024" Maximum="65536"
+                                 Increment="256" Value="4096" FormatString="0" ShowButtonSpinner="False"/>
+                </StackPanel>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*">
+                <TextBlock Text="分辨率" VerticalAlignment="Center" FontSize="12"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                  <NumericUpDown x:Name="NumWidth" Width="110" Minimum="0" Maximum="7680" Value="854" FormatString="0" ShowButtonSpinner="False"/>
+                  <TextBlock Text="×" VerticalAlignment="Center"/>
+                  <NumericUpDown x:Name="NumHeight" Width="110" Minimum="0" Maximum="4320" Value="480" FormatString="0" ShowButtonSpinner="False"/>
+                  <CheckBox x:Name="ChkFullscreen" Content="全屏" VerticalAlignment="Center"/>
+                </StackPanel>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*,Auto,Auto">
+                <TextBlock Text="Java 路径" VerticalAlignment="Center" FontSize="12"/>
+                <TextBox Grid.Column="1" x:Name="TxtJava" Width="330" HorizontalAlignment="Left"
+                         Watermark="留空则自动检测或下载"/>
+                <Button Grid.Column="2" x:Name="BtnBrowseJava" Content="浏览" Padding="10,4" Margin="8,0"/>
+                <Button Grid.Column="3" x:Name="BtnAutoJava" Content="自动检测" Padding="10,4"/>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*,Auto">
+                <TextBlock Text="游戏目录" VerticalAlignment="Center" FontSize="12"/>
+                <TextBox Grid.Column="1" x:Name="TxtGameDir" Width="330" HorizontalAlignment="Left"
+                         Watermark="留空则使用实例独立目录"/>
+                <Button Grid.Column="2" x:Name="BtnBrowseDir" Content="浏览" Padding="10,4"/>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*">
+                <TextBlock Text="离线用户名" VerticalAlignment="Center" FontSize="12"/>
+                <TextBox Grid.Column="1" x:Name="TxtOfflineName" Width="220" HorizontalAlignment="Left"
+                         Watermark="未登录账号时使用"/>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*">
+                <TextBlock Text="附加 JVM 参数" VerticalAlignment="Center" FontSize="12"/>
+                <TextBox Grid.Column="1" x:Name="TxtExtraJvm" Width="420" HorizontalAlignment="Left"
+                         Watermark="-XX:+UseG1GC 等"/>
+              </Grid>
+
+              <Grid ColumnDefinitions="110,*">
+                <TextBlock Text="附加游戏参数" VerticalAlignment="Center" FontSize="12"/>
+                <TextBox Grid.Column="1" x:Name="TxtExtraGame" Width="420" HorizontalAlignment="Left"
+                         Watermark="--quickPlaySingleplayer 等"/>
+              </Grid>
+
+              <Border Background="#f6f7f9" CornerRadius="10" Padding="16" Margin="0,6,0,0">
+                <StackPanel Spacing="10">
+                  <TextBlock Text="启动器设置" FontWeight="Bold" FontSize="13"/>
+                  <Grid ColumnDefinitions="110,*">
+                    <TextBlock Text="游戏根目录" VerticalAlignment="Center" FontSize="12"/>
+                    <TextBox Grid.Column="1" x:Name="TxtGameRoot" Width="360" HorizontalAlignment="Left"
+                             Watermark="默认 %APPDATA%\RaincloudsMC"/>
+                  </Grid>
+                  <Grid ColumnDefinitions="110,*">
+                    <TextBlock Text="Azure ClientId" VerticalAlignment="Center" FontSize="12"/>
+                    <TextBox Grid.Column="1" x:Name="TxtClientId" Width="360" HorizontalAlignment="Left"
+                             Watermark="微软应用 ClientId，用于正版登录"/>
+                  </Grid>
+                  <Grid ColumnDefinitions="110,*">
+                    <TextBlock Text="并发下载" VerticalAlignment="Center" FontSize="12"/>
+                    <NumericUpDown Grid.Column="1" x:Name="NumConcurrency" Width="128" Minimum="1"
+                                   Maximum="32" Value="8" FormatString="0" HorizontalAlignment="Left"
+                                   ShowButtonSpinner="False"/>
+                  </Grid>
+                </StackPanel>
+              </Border>
+
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button x:Name="BtnSaveProfile" Content="保存设置" Padding="20,7"
+                        Background="#1f6feb" Foreground="White" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding StatusMessage}" Foreground="#1f6feb" VerticalAlignment="Center" FontSize="12"/>
+              </StackPanel>
+            </StackPanel>
+          </ScrollViewer>
+        </TabItem>
+
+        <!-- 工具箱（进阶模块，需 ¥20 解锁） -->
+        <TabItem Header="工具箱">
+          <ScrollViewer>
+            <StackPanel Margin="24,18" Spacing="16">
+              <StackPanel Orientation="Horizontal" Spacing="12">
+                <TextBlock Text="进阶模块" FontWeight="Bold" FontSize="16"/>
+                <Border Background="#fff8e6" BorderBrush="#f0d9a0" BorderThickness="1" CornerRadius="6" Padding="8,3">
+                  <TextBlock Text="一次性 ¥20 解锁全部" FontSize="11" Foreground="#7a5200"/>
+                </Border>
+              </StackPanel>
+
+              <Grid ColumnDefinitions="*,*,*" >
+                <!-- 联机 -->
+                <Border Grid.Column="0" Background="#f6f7f9" CornerRadius="10" Padding="16" Margin="0,0,8,0">
+                  <StackPanel Spacing="10">
+                    <TextBlock Text="联机" FontWeight="Bold" FontSize="14"/>
+                    <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#555"
+                               Text="服务器收藏、局域网扫描、一键复制加入信息，方便与好友联机。"/>
+                    <Button x:Name="BtnNetwork" Content="打开联机" HorizontalAlignment="Stretch"
+                            Padding="0,8" Background="#1f6feb" Foreground="White" BorderThickness="0"/>
+                  </StackPanel>
+                </Border>
+                <!-- 内网穿透 -->
+                <Border Grid.Column="1" Background="#f6f7f9" CornerRadius="10" Padding="16" Margin="4,0,4,0">
+                  <StackPanel Spacing="10">
+                    <TextBlock Text="内网穿透" FontWeight="Bold" FontSize="14"/>
+                    <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#555"
+                               Text="内置 frpc，把内网服务端映射为 frps 上的公网地址（需自备 frps 服务器）。"/>
+                    <Button x:Name="BtnFrpc" Content="打开内网穿透" HorizontalAlignment="Stretch"
+                            Padding="0,8" Background="#1f6feb" Foreground="White" BorderThickness="0"/>
+                  </StackPanel>
+                </Border>
+                <!-- 一键开服 -->
+                <Border Grid.Column="2" Background="#f6f7f9" CornerRadius="10" Padding="16" Margin="8,0,0,0">
+                  <StackPanel Spacing="10">
+                    <TextBlock Text="一键开服" FontWeight="Bold" FontSize="14"/>
+                    <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#555"
+                               Text="下载并托管 Vanilla / Paper / Fabric 服务端，插件目录一键管理。"/>
+                    <Button x:Name="BtnServer" Content="打开开服" HorizontalAlignment="Stretch"
+                            Padding="0,8" Background="#1f6feb" Foreground="White" BorderThickness="0"/>
+                  </StackPanel>
+                </Border>
+              </Grid>
+
+              <Border Background="#eef4ff" CornerRadius="10" Padding="14">
+                <StackPanel Spacing="6">
+                  <TextBlock Text="这些模块需要进阶授权" FontWeight="Bold" FontSize="12" Foreground="#12408f"/>
+                  <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#2b4d86"
+                             Text="三个模块打包为一次 ¥20 付费，解锁后永久可用。点击任意模块时若未解锁，会引导你到激活窗口获取 RCM- 开头的激活码。"/>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </ScrollViewer>
+        </TabItem>
+      </TabControl>
+    </Grid>
+  </DockPanel>
+</Window>

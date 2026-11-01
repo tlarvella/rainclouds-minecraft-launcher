@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="520" d:DesignHeight="470"
+        x:Class="RCL.UI.Views.LoginDialog"
+        Title="登录微软账号"
+        Width="520" Height="470" CanResize="False">
+  <StackPanel Margin="20" Spacing="10">
+    <TextBlock FontSize="16" FontWeight="Bold">微软账号登录（设备码）</TextBlock>
+    <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#666"
+               Text="微软要求第三方启动器使用各自注册的 Azure 应用。请先填写你的 ClientId；没有可点击“如何获取”，按说明免费注册（约 2 分钟）。"/>
+
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <TextBlock Text="ClientId" Width="64" VerticalAlignment="Center"/>
+      <TextBox x:Name="ClientIdBox" Width="300" Watermark="粘贴 Azure 应用 ClientId"/>
+      <Button x:Name="HelpBtn" Content="如何获取" Padding="10,4"/>
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" Spacing="12">
+      <Button x:Name="StartBtn" Content="开始登录" Padding="16,6"/>
+      <TextBlock x:Name="StatusBox" Text="等待操作…" VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="320"/>
+    </StackPanel>
+
+    <Border x:Name="CodePanel" IsVisible="False" Background="#eef4ff" CornerRadius="6" Padding="10">
+      <StackPanel Spacing="8">
+        <TextBlock Text="在浏览器打开下方网址，输入用户代码完成登录：" TextWrapping="Wrap" FontSize="12"/>
+        <TextBox x:Name="UrlBox" IsReadOnly="True" FontSize="13"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="用户代码：" VerticalAlignment="Center"/>
+          <TextBox x:Name="CodeBox" IsReadOnly="True" FontSize="18" FontWeight="Bold" Width="180"/>
+          <Button x:Name="CopyBtn" Content="复制"/>
+          <Button x:Name="OpenUrlBtn" Content="打开网址"/>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <TextBlock x:Name="HintBox" TextWrapping="Wrap" FontSize="11" Foreground="#c0392b" IsVisible="False"/>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,6,0,0">
+      <Button x:Name="CancelBtn" Content="关闭"/>
+      <Button x:Name="OkBtn" Content="完成" IsVisible="False"/>
+    </StackPanel>
+  </StackPanel>
+</Window>

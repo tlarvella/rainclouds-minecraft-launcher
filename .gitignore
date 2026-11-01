@@ -1,0 +1,39 @@
+# ===== 构建产物 =====
+bin/
+obj/
+dist/
+publish-folder/
+
+# ===== 已编译的二进制（作为 GitHub Release 附件发布，不入库）=====
+*.exe
+*.zip
+*.bin
+*.dll
+*.pdb
+
+# ===== 签名私钥与证书：绝不提交 =====
+tools/cert/
+
+# ===== Python 缓存 =====
+__pycache__/
+*.pyc
+
+# ===== Java 自研核心的编译中间产物 =====
+src/RaincloudsCore/classes/
+src/RaincloudsCore/modclasses/
+src/RaincloudsCore/mods/
+src/RaincloudsCore/dist/
+
+# ===== IDE =====
+.vs/
+.vscode/
+.idea/
+
+# ===== 运行时日志 =====
+crash.log
+*.log
+
+# ===== core dump / 测试残留 =====
+core
+core.*
+*.core

@@ -1,0 +1,85 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="RCL.UI.Views.ActivationWindow"
+        Title="解锁 Rainclouds 启动器 社区版"
+        Width="820" Height="600" MinWidth="760" MinHeight="560"
+        WindowStartupLocation="CenterOwner"
+        Background="#ffffff">
+
+  <DockPanel>
+    <Border DockPanel.Dock="Top" Background="#1f6feb" Padding="20,16">
+      <StackPanel Spacing="2">
+        <TextBlock Text="解锁 Rainclouds 启动器 社区版" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock Text="扫码付款后把截图发给作者，获取对应激活码；激活码本机离线校验，不上传任何信息。" FontSize="12" Foreground="#cfe0ff"/>
+      </StackPanel>
+    </Border>
+
+    <Border DockPanel.Dock="Bottom" Background="#f6f8fa" BorderBrush="#e1e4e8" BorderThickness="0,1,0,0" Padding="18,12">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock x:Name="StatusText" VerticalAlignment="Center" FontSize="12" Foreground="#666"
+                   Text="如有疑问，把支付截图（含金额与时间）发给作者即可。"/>
+        <Button Grid.Column="1" x:Name="BtnClose" Content="关闭" Padding="22,7"/>
+      </Grid>
+    </Border>
+
+    <Grid ColumnDefinitions="*,*" Margin="20">
+
+      <!-- 完整版 -->
+      <Border Grid.Column="0" BorderBrush="#e1e4e8" BorderThickness="1" CornerRadius="10" Padding="16" Margin="0,0,10,0">
+        <DockPanel>
+          <TextBlock DockPanel.Dock="Top" Text="完整版 · ¥1" FontWeight="Bold" FontSize="15" Foreground="#12408f"/>
+          <Border DockPanel.Dock="Top" BorderBrush="#e1e4e8" BorderThickness="1" CornerRadius="10"
+                  Padding="10" Background="#fafbfc" Margin="0,12,0,0" HorizontalAlignment="Center">
+            <StackPanel Spacing="8">
+              <Image x:Name="PayImage" Width="190" Height="259" Stretch="Uniform"/>
+              <TextBlock Text="微信扫码支付 ¥1" HorizontalAlignment="Center" FontSize="12" FontWeight="SemiBold"/>
+            </StackPanel>
+          </Border>
+
+          <StackPanel DockPanel.Dock="Top" Margin="0,12,0,0" Spacing="7">
+            <TextBlock Text="包含：多实例 / 模组插件共存 / 内置核心 / 微软登录 / 自动 Java" FontSize="11.5" Foreground="#444" TextWrapping="Wrap"/>
+          </StackPanel>
+
+          <StackPanel DockPanel.Dock="Bottom" Spacing="8" Margin="0,12,0,0">
+            <TextBox x:Name="TxtKey" Watermark="RCL-XXXXX-XXXXX-XXXXX-XXXXX"
+                     FontFamily="Consolas" FontSize="14" Padding="10,9"/>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <Button x:Name="BtnActivateCore" Content="激活完整版" Padding="20,8"
+                      Background="#2ea043" Foreground="White" FontWeight="SemiBold"/>
+              <Button x:Name="BtnPasteCore" Content="粘贴" Padding="14,8"/>
+            </StackPanel>
+            <TextBlock x:Name="MsgCore" FontSize="12" TextWrapping="Wrap"/>
+          </StackPanel>
+        </DockPanel>
+      </Border>
+
+      <!-- 进阶模块 -->
+      <Border Grid.Column="1" BorderBrush="#e1e4e8" BorderThickness="1" CornerRadius="10" Padding="16" Margin="10,0,0,0">
+        <DockPanel>
+          <TextBlock DockPanel.Dock="Top" Text="进阶模块 · ¥20" FontWeight="Bold" FontSize="15" Foreground="#7a3b00"/>
+          <Border DockPanel.Dock="Top" Background="#fff8e6" BorderBrush="#f0d9a0" BorderThickness="1" CornerRadius="6" Padding="10" Margin="0,12,0,0">
+            <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#7a5200"
+                       Text="一次付费 ¥20，解锁三个进阶模块：联机、内网穿透、一键开服。与主程序解锁相互独立。"/>
+          </Border>
+
+          <StackPanel DockPanel.Dock="Top" Margin="0,12,0,0" Spacing="7">
+            <TextBlock Text="·  联机模块：服务器收藏、局域网扫描、一键直连" FontSize="11.5" Foreground="#444"/>
+            <TextBlock Text="·  内网穿透：内置 frpc，把内网服映射为公网地址（需自备 frp 服务器）" FontSize="11.5" Foreground="#444" TextWrapping="Wrap"/>
+            <TextBlock Text="·  一键开服：下载并托管 Vanilla / Paper / Fabric 服务端，插件目录管理" FontSize="11.5" Foreground="#444" TextWrapping="Wrap"/>
+          </StackPanel>
+
+          <StackPanel DockPanel.Dock="Bottom" Spacing="8" Margin="0,12,0,0">
+            <TextBox x:Name="TxtKeyModules" Watermark="RCM-XXXXX-XXXXX-XXXXX-XXXXX"
+                     FontFamily="Consolas" FontSize="14" Padding="10,9"/>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <Button x:Name="BtnActivateModules" Content="激活进阶模块" Padding="20,8"
+                      Background="#d9822b" Foreground="White" FontWeight="SemiBold"/>
+              <Button x:Name="BtnPasteModules" Content="粘贴" Padding="14,8"/>
+            </StackPanel>
+            <TextBlock x:Name="MsgModules" FontSize="12" TextWrapping="Wrap"/>
+          </StackPanel>
+        </DockPanel>
+      </Border>
+    </Grid>
+  </DockPanel>
+</Window>

@@ -1,0 +1,117 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="RCL.UI.Views.AccountManagerWindow"
+        Title="账号管理"
+        Width="700" Height="520" MinWidth="640" MinHeight="460"
+        WindowStartupLocation="CenterOwner"
+        Background="#ffffff">
+
+  <DockPanel>
+    <!-- 顶部 -->
+    <Border DockPanel.Dock="Top" Background="#f6f8fa" BorderBrush="#e1e4e8" BorderThickness="0,0,0,1" Padding="18,14">
+      <StackPanel Spacing="4">
+        <TextBlock Text="账号管理" FontSize="18" FontWeight="Bold"/>
+        <TextBlock Text="可同时保存多个账号，随时切换。离线账号无需联网，适合单机与离线服务器。"
+                   FontSize="12" Foreground="#666"/>
+      </StackPanel>
+    </Border>
+
+    <!-- 底部按钮 -->
+    <Border DockPanel.Dock="Bottom" Background="#f6f8fa" BorderBrush="#e1e4e8" BorderThickness="0,1,0,0" Padding="16,12">
+      <Grid ColumnDefinitions="*,Auto">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="BtnAddMs" Content="添加微软账号" Padding="14,7" Background="#1f6feb" Foreground="White"/>
+          <Button x:Name="BtnAddOffline" Content="添加离线账号" Padding="14,7"/>
+        </StackPanel>
+        <Button Grid.Column="1" x:Name="BtnClose" Content="关闭" Padding="20,7"/>
+      </Grid>
+    </Border>
+
+    <!-- 离线账号输入区 -->
+    <Border DockPanel.Dock="Bottom" x:Name="OfflinePanel" IsVisible="False"
+            Background="#fff8e6" BorderBrush="#f0d9a0" BorderThickness="0,1,0,0" Padding="16,10">
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <TextBlock Text="玩家名" VerticalAlignment="Center" Width="60"/>
+        <TextBox x:Name="TxtOfflineName" Width="220" Watermark="例如 Steve，最多 16 个字符"/>
+        <Button x:Name="BtnOfflineOk" Content="创建" Padding="16,5" Background="#2ea043" Foreground="White"/>
+        <TextBlock x:Name="OfflineHint" FontSize="12" Foreground="#a06000" VerticalAlignment="Center"/>
+      </StackPanel>
+    </Border>
+
+    <Grid ColumnDefinitions="260,*">
+      <!-- 账号列表 -->
+      <Border Grid.Column="0" Background="#fafbfc" BorderBrush="#e1e4e8" BorderThickness="0,0,1,0">
+        <ListBox x:Name="LstAccounts" Background="Transparent" BorderThickness="0"
+                 ItemsSource="{Binding Accounts}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid ColumnDefinitions="Auto,*,Auto" Height="50" Margin="2,1">
+                <Panel Width="38" Height="38" VerticalAlignment="Center">
+                  <Border CornerRadius="6" Background="{Binding ColorBrush}" IsVisible="{Binding HasNoHead}">
+                    <TextBlock Text="{Binding Initial}" Foreground="White" FontWeight="Bold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                  </Border>
+                  <Border CornerRadius="6" ClipToBounds="True" IsVisible="{Binding HasHead}">
+                    <Image Source="{Binding Head}" Stretch="UniformToFill"/>
+                  </Border>
+                </Panel>
+                <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" Spacing="1">
+                  <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="14"/>
+                  <TextBlock Text="{Binding TypeText}" FontSize="11" Foreground="#8a8f98"/>
+                </StackPanel>
+                <Border Grid.Column="2" Background="#e7f0ff" CornerRadius="10" Padding="7,2"
+                        VerticalAlignment="Center" IsVisible="{Binding Account.IsMicrosoft}">
+                  <TextBlock Text="正版" FontSize="10" Foreground="#1f6feb"/>
+                </Border>
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </Border>
+
+      <!-- 详情 -->
+      <Border Grid.Column="1" Padding="24">
+        <StackPanel Spacing="16" x:Name="DetailPanel">
+          <StackPanel Orientation="Horizontal" Spacing="14">
+            <Panel Width="64" Height="64">
+              <Border CornerRadius="10" Background="{Binding SelectedAccount.ColorBrush}"
+                      IsVisible="{Binding SelectedAccount.HasNoHead}">
+                <TextBlock Text="{Binding SelectedAccount.Initial}" Foreground="White" FontSize="26"
+                           FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <Border CornerRadius="10" ClipToBounds="True" IsVisible="{Binding SelectedAccount.HasHead}">
+                <Image Source="{Binding SelectedAccount.Head}" Stretch="UniformToFill"/>
+              </Border>
+            </Panel>
+            <StackPanel VerticalAlignment="Center" Spacing="4">
+              <TextBlock Text="{Binding SelectedAccount.Name}" FontSize="20" FontWeight="Bold"/>
+              <TextBlock Text="{Binding SelectedAccount.TypeText}" FontSize="12" Foreground="#666"/>
+            </StackPanel>
+          </StackPanel>
+
+          <Border Background="#f6f8fa" CornerRadius="8" Padding="14">
+            <StackPanel Spacing="8">
+              <Grid ColumnDefinitions="90,*">
+                <TextBlock Text="UUID" Foreground="#666" FontSize="12"/>
+                <TextBlock Grid.Column="1" Text="{Binding SelectedAccount.UuidText}" FontSize="12"
+                           TextWrapping="Wrap" FontFamily="Consolas"/>
+              </Grid>
+              <Grid ColumnDefinitions="90,*">
+                <TextBlock Text="状态" Foreground="#666" FontSize="12"/>
+                <TextBlock Grid.Column="1" Text="{Binding SelectedAccount.DetailText}" FontSize="12"/>
+              </Grid>
+            </StackPanel>
+          </Border>
+
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button x:Name="BtnSetCurrent" Content="设为当前账号" Padding="16,7" Background="#1f6feb" Foreground="White"/>
+            <Button x:Name="BtnDelete" Content="删除账号" Padding="16,7"/>
+          </StackPanel>
+
+          <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="#8a8f98"
+                     Text="提示：微软登录需要你自己注册的 Azure ClientId（见设置）。没有正版账号时，直接添加离线账号即可开始游戏。"/>
+        </StackPanel>
+      </Border>
+    </Grid>
+  </DockPanel>
+</Window>

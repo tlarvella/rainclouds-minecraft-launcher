@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="RCL.UI.Views.ServerWindow"
+        Title="一键开服模块"
+        Width="720" Height="620" MinWidth="640" MinHeight="540"
+        WindowStartupLocation="CenterOwner" Background="#ffffff">
+
+  <DockPanel Margin="18">
+    <TextBlock DockPanel.Dock="Top" Text="一键开服 · 下载并托管 Minecraft 服务端"
+               FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+    <Grid DockPanel.Dock="Top" ColumnDefinitions="120,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,0,0,10">
+      <TextBlock Grid.Row="0" Grid.Column="0" Text="服务端类型" VerticalAlignment="Center" FontSize="12"/>
+      <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CmbType" Width="160" HorizontalAlignment="Left" SelectedIndex="0">
+        <ComboBoxItem Content="原版 Vanilla"/>
+        <ComboBoxItem Content="Paper"/>
+        <ComboBoxItem Content="Fabric"/>
+      </ComboBox>
+      <TextBlock Grid.Row="1" Grid.Column="0" Text="游戏版本" VerticalAlignment="Center" FontSize="12"/>
+      <TextBox Grid.Row="1" Grid.Column="1" x:Name="TxtVersion" Text="1.20.1" Width="160" HorizontalAlignment="Left"/>
+      <TextBlock Grid.Row="2" Grid.Column="0" Text="端口" VerticalAlignment="Center" FontSize="12"/>
+      <NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="NumPort" Value="25565" Minimum="1" Maximum="65535" FormatString="0" ShowButtonSpinner="False" Width="160" HorizontalAlignment="Left"/>
+      <TextBlock Grid.Row="3" Grid.Column="0" Text="内存 (MB)" VerticalAlignment="Center" FontSize="12"/>
+      <NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="NumMem" Value="2048" Minimum="512" Maximum="65536" Increment="256" FormatString="0" ShowButtonSpinner="False" Width="160" HorizontalAlignment="Left"/>
+      <TextBlock Grid.Row="4" Grid.Column="0" Text="MOTD" VerticalAlignment="Center" FontSize="12"/>
+      <TextBox Grid.Row="4" Grid.Column="1" x:Name="TxtMotd" Text="A Rainclouds Server" Width="260" HorizontalAlignment="Left"/>
+      <TextBlock Grid.Row="5" Grid.Column="0" Text="正版验证" VerticalAlignment="Center" FontSize="12"/>
+      <CheckBox Grid.Row="5" Grid.Column="1" x:Name="ChkOnline" Content="开启（关闭则离线可进）" IsChecked="True" VerticalAlignment="Center"/>
+      <TextBlock Grid.Row="6" Grid.Column="0" Text="Java 路径" VerticalAlignment="Center" FontSize="12"/>
+      <Grid Grid.Row="6" Grid.Column="1" ColumnDefinitions="*,Auto">
+        <TextBox Grid.Column="0" x:Name="TxtJava" Watermark="留空则自动检测/下载"/>
+        <Button Grid.Column="1" x:Name="BtnJava" Content="浏览" Padding="10,4" Margin="8,0,0,0"/>
+      </Grid>
+    </Grid>
+
+    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
+      <Button x:Name="BtnDownload" Content="下载服务端" Padding="14,6" Background="#1f6feb" Foreground="White"/>
+      <Button x:Name="BtnStart" Content="启动服务端" Padding="14,6" Background="#2ea043" Foreground="White"/>
+      <Button x:Name="BtnStop" Content="停止" Padding="14,6"/>
+      <Button x:Name="BtnPlugins" Content="打开插件目录" Padding="14,6"/>
+    </StackPanel>
+
+    <Border DockPanel.Dock="Top" Background="#eef4ff" CornerRadius="6" Padding="10" Margin="0,0,0,10">
+      <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#2b4d86"
+                 Text="服务端文件位于 数据目录/server。Bukkit/Spigot/Paper 插件放入 plugins 目录即可生效（仅 Paper/Spigot 等支持插件；原版不支持插件）。首次启动会自动同意 EULA。"/>
+    </Border>
+
+    <TextBox x:Name="TxtLog" IsReadOnly="True" FontFamily="Consolas" FontSize="11"
+             Background="#16181d" Foreground="#c9d1df" BorderThickness="0" CornerRadius="6"
+             TextWrapping="Wrap" AcceptsReturn="True" Padding="10,8"/>
+  </DockPanel>
+</Window>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rainclouds Minecraft Launcher 下载</title>
+<style>
+  :root { --bg:#0e1726; --card:#162236; --accent:#3da9fc; --text:#e6edf3; --muted:#8b9bb4; --ok:#3ddc97; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, "Segoe UI", "Microsoft YaHei", Roboto, sans-serif;
+         background: radial-gradient(1200px 600px at 70% -10%, #1c2c47, var(--bg)); color: var(--text);
+         min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .card { background: var(--card); border:1px solid #26344e; border-radius:16px; padding:40px;
+          max-width:600px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  h1 { margin:0 0 6px; font-size:26px; }
+  .sub { color:var(--muted); margin:0 0 26px; line-height:1.6; font-size:14px; }
+  .btn { display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:#04121f;
+         font-weight:700; text-decoration:none; padding:14px 22px; border-radius:10px; font-size:16px;
+         transition:transform .08s ease, box-shadow .2s ease; box-shadow:0 8px 20px rgba(61,169,252,.35); }
+  .btn:hover { transform:translateY(-1px); box-shadow:0 12px 26px rgba(61,169,252,.45); }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid #2f4463; box-shadow:none;
+               font-size:14px; padding:11px 18px; }
+  .btn.ghost:hover { border-color:var(--accent); color:var(--accent); }
+  .row { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  .meta { margin-top:24px; font-size:13px; color:var(--muted); line-height:1.8; }
+  .meta b { color:var(--text); }
+  .tag { display:inline-block; background:#22314c; color:#9fc7ff; border-radius:6px; padding:2px 8px;
+         font-size:12px; margin-right:6px; margin-bottom:6px; }
+  .sec { margin-top:18px; }
+  code { background:#0c1626; padding:2px 6px; border-radius:5px; color:#9fe6c4; }
+  .note { margin-top:20px; background:#122033; border-left:3px solid var(--ok); border-radius:0 8px 8px 0;
+          padding:12px 16px; font-size:12.5px; color:#a9bcd4; line-height:1.8; }
+  .badge { font-size:11px; color:var(--ok); border:1px solid #23543f; background:#0f2a20;
+           border-radius:20px; padding:2px 9px; margin-left:8px; vertical-align:middle; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>☁️ Rainclouds Minecraft Launcher <span class="badge">社区版 v1.2</span></h1>
+    <p class="sub">简称 <b>rcl.exe</b>，适配 Windows 10 及以上系统。自包含运行环境，无需安装 .NET。内置自研 10yv 核心，支持 Mod 与插件共存。</p>
+
+    <div class="row">
+      <a class="btn" href="rcl.exe" download>⬇️ 下载 rcl.exe（单文件 · 约 43 MB）</a>
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <a class="btn ghost" href="rcl-portable.bin" download="rcl-portable.zip">📦 便携版 zip（解压即用 · 约 38 MB）</a>
+    </div>
+    <div style="margin-top:14px; font-size:13px; color:var(--muted);">
+      使用说明：<a href="README.txt" style="color:var(--accent); text-decoration:none;">README.txt</a>
+    </div>
+
+    <div class="note">
+      <b>如果双击 rcl.exe 没反应：</b>请改用<b>便携版 zip</b>，解压到任意文件夹后双击里面的 <code>rcl.exe</code>。
+      若下载下来的文件名是 <code>.bin</code> 结尾，请把它重命名为 <code>.zip</code> 再解压。
+      若仍失败，打开 <code>%APPDATA%\RaincloudsMC\crash.log</code> 查看错误原因。
+    </div>
+
+    <div class="meta">
+      <div class="sec"><span class="tag">多账号登录</span><span class="tag">微软 + 离线</span><span class="tag">自研 10yv 核心</span><span class="tag">Fabric / Forge / Quilt</span><span class="tag">自动 Java</span><span class="tag">Mod / 插件共存</span><span class="tag">启动页面</span><span class="tag">数字签名</span><span class="tag">一元解锁</span><span class="tag">进阶模块 ¥20</span></div>
+      <div class="sec">
+        <b>v1.2 社区版 新功能：</b><br/>
+        · <b>自研 10yv 核心</b>：内置完全自研的 Rainclouds 10yv 核心引擎（对标 Fabric），提供自有 Mod API 与事件总线，自带 3 个演示 Mod（hello / fps / spawninfo）。<br/>
+        · <b>Mod 与插件共存</b>：每个档案独立游戏目录，Fabric/Forge Mod 与 Bukkit/Spigot/Paper 插件按实例隔离，自研 Mod 使用 <code>rainclouds.mod.json</code> 清单互不冲突。<br/>
+        · <b>进阶模块（¥20 打包解锁）</b>：联机、内网穿透（内置 frpc，自备服务器）、一键开服（原版 / Paper / Fabric）三大模块一次解锁全部。<br/>
+        · <b>启动页面</b>：启动先显示 Rainclouds 启动页，再进入主窗口。<br/>
+        · <b>数字签名</b>：<code>rcl.exe</code> 已用 Rainclouds 自签名证书签名，属性版权栏显示 <code>Copyright © Rainclouds</code>。
+      </div>
+      <div class="sec">
+        <b>使用提示：</b><br/>
+        · 首次使用建议在「设置」中填入你自己的微软 Azure 应用 <code>ClientId</code>（见 README）。<br/>
+        · 内置默认 ClientId 可直接试用，但稳定性以自建应用为佳。<br/>
+        · 数据目录：<code>%APPDATA%\RaincloudsMC</code>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

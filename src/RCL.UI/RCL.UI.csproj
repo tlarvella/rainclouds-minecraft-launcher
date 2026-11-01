@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>rcl</AssemblyName>
+    <RootNamespace>RCL.UI</RootNamespace>
+    <LangVersion>10</LangVersion>
+    <!-- 品牌与版本资源：决定 exe 右键“属性 → 详细信息”中的版权/公司/版本 -->
+    <AssemblyTitle>Rainclouds Minecraft Launcher 社区版</AssemblyTitle>
+    <AssemblyProduct>Rainclouds Minecraft Launcher 社区版</AssemblyProduct>
+    <AssemblyCompany>Rainclouds</AssemblyCompany>
+    <AssemblyCopyright>Copyright © Rainclouds</AssemblyCopyright>
+    <Version>1.2.0.0</Version>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+    <!-- 发布为 Windows 自包含单文件 exe -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <PublishTrimmed>false</PublishTrimmed>
+    <!-- 关键：把 SkiaSharp / HarfBuzz / ANGLE 等原生库一并打进单文件，运行时自解压 -->
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RCL.Core\RCL.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>RCL.Core</AssemblyName>
+    <RootNamespace>RCL.Core</RootNamespace>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+
+  <!-- 内嵌 Rainclouds 自研核心：加载器 jar + 演示 Mod jar -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\rainclouds-core.jar" />
+    <EmbeddedResource Include="Resources\rainclouds-hello.jar" />
+    <EmbeddedResource Include="Resources\rainclouds-fps.jar" />
+    <EmbeddedResource Include="Resources\rainclouds-spawn.jar" />
+  </ItemGroup>
+
+</Project>
