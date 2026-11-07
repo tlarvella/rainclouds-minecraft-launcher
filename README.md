@@ -1,7 +1,19 @@
 # Rainclouds Minecraft Launcher 社区版 (rcl)
 
 一个面向 **Windows 10 及以上** 的第三方 Minecraft 启动器，单文件可执行 `rcl.exe`。
-基于 **.NET 6 + Avalonia UI** 构建，发布为 Windows 自包含（self-contained）单文件，无需用户安装运行时。当前版本 **v1.2 社区版**。
+基于 **.NET 6 + Avalonia UI** 构建，发布为 Windows 自包含（self-contained）单文件，无需用户安装运行时。当前版本 **v1.3 社区版（开源核心）**。
+
+---
+
+## 📖 开源 / 闭源说明（Open-Core）
+
+本项目采用 **开放核心（Open-Core）** 模式：
+
+- **开源（本仓库）**：启动器核心、自研 10yv 核心、微软登录、版本管理、Mod 加载、Java 管理等全部基础能力，**完整源码公开**，可自由查看与构建。
+- **闭源（进阶模块）**：联机 / 内网穿透 / 一键开服这三大进阶模块的 **源码不公开**，以独立的闭源程序集 `RCL.Paid.dll` 形式交付。开源端仅保留其契约接口（`RCL.Core.Modules.IPaidModule`）与动态加载器（`PaidModuleLoader`）——运行时在验证授权后才会加载该 DLL。
+- **授权**：三大模块打包 ¥20 解锁（对应 `RCM-` 激活码），与核心功能（¥1，`RCL-` 激活码）相互独立。无 `RCL.Paid.dll` 时，社区版仅含开源功能，进阶模块按钮会优雅提示「未安装」。
+
+> 闭源源码位于本地 `src/RCL.Paid/`（已在 `.gitignore` 中排除，**不进入本公开仓库**）。如需自行构建闭源 DLL 用于交付，见下方「构建」章节。
 
 ---
 
@@ -57,11 +69,13 @@
 
 ## 🔓 进阶模块（联机 / 内网穿透 / 一键开服，¥20 打包解锁）
 
-启动器内置三大进阶模块，**打包售价 20 元，一次解锁全部**，在「工具箱」标签页中可用：
+启动器提供三大进阶模块，**打包售价 20 元，一次解锁全部**，在「工具箱」标签页中可用：
 
 - **联机模块**：服务器收藏、局域网扫描、一键复制连接信息。
 - **内网穿透模块**：内置 `frpc` 客户端，自备 frp 服务器地址与令牌即可把本地 `25565` 端口映射为公网地址（需自备 frp 服务端）。
 - **一键开服模块**：自动下载并启动 原版 / Paper / Fabric 服务端，可设版本、端口、内存、MOTD、正版验证开关，一键开服。
+
+> **授权与交付**：这三大模块的**源码闭源**（见上方「开源 / 闭源说明」）。购买并激活 `RCM-` 激活码后，会获得闭源组件 `RCL.Paid.dll` 与本机解锁文件；将其与 `rcl.exe` 放在同一目录即可启用。开源社区版（GitHub Release）仅包含基础启动器，不含该闭源组件。
 
 未解锁时模块卡片会提示需要解锁；在「激活」窗口的 **「进阶模块 ¥20」** 中粘贴 `RCM-` 开头的激活码即可解锁。激活状态保存在本机，离线永久有效。核心功能（完整版）仍需一元解锁，对应 `RCL-` 激活码。
 
@@ -75,7 +89,7 @@
 build.bat
 ```
 
-产物位于 `dist/rcl.exe`。在 Windows 上由 MSBuild 发布时，会正确生成 GUI 子系统并嵌入清单（DPI / Windows 10 兼容），无需额外处理。
+产物位于 `dist/rcl.exe`（社区版，仅含开源功能）。在 Windows 上由 MSBuild 发布时，会正确生成 GUI 子系统并嵌入清单（DPI / Windows 10 兼容），无需额外处理。
 
 ### 在 Linux / macOS 交叉发布
 
@@ -86,28 +100,43 @@ chmod +x build.sh
 
 交叉发布时无法由 MSBuild 自定义 PE 子系统，脚本会自动把 `rcl.exe` 的子系统从 CONSOLE 改为 GUI，避免启动弹出控制台窗口；随后用 `pefile` 注入 `VS_VERSION_INFO` 版本资源（版权 `Copyright © Rainclouds`、产品名、版本号），并用 `osslsigncode` 完成 Authenticode 自签名。
 
+### 构建闭源进阶模块（仅交付用，不公开）
+
+进阶模块的源码位于本地 `src/RCL.Paid/`（默认不在本仓库）。构建可交付的闭源组件：
+
+```bash
+chmod +x build-closed.sh
+./build-closed.sh
+```
+
+产物位于 `dist-paid/RCL.Paid.dll`（已签名）。将该 DLL 与 `rcl.exe` 置于同一目录，并在本机激活 `RCM-` 激活码后，进阶模块即可启用。**请勿将 `RCL.Paid.dll` 或 `src/RCL.Paid/` 提交到公开仓库。**
+
 ---
 
 ## 📂 项目结构
 
 ```
 rcl/
-├── build.bat / build.sh      # 构建脚本
-├── rcl.exe                   # 已构建好的可执行文件（Windows 10+）
+├── build.sh / build.bat          # 社区版（开源）构建脚本
+├── build-closed.sh               # 闭源进阶模块构建脚本（仅本地交付用）
+├── rcl.exe                       # 已构建好的可执行文件（Windows 10+）
 ├── src/
-│   ├── RCL.Core/             # 核心库（与平台无关）
-│   │   ├── Auth/             # 微软认证（设备码 / Xbox / XSTS / Minecraft）
-│   │   ├── Versions/         # 版本清单、版本 JSON 解析、inheritsFrom 合并
-│   │   ├── Download/         # 并行下载器（带进度、重试、SHA1 校验）
-│   │   ├── Libraries/        # 依赖库筛选、classpath、natives 解压
-│   │   ├── Assets/           # 资产索引与对象下载、legacy 虚拟资产
-│   │   ├── Java/             # 本机 Java 检测、Temurin 下载
-│   │   ├── ModLoaders/       # Fabric / Forge / Quilt 安装器
-│   │   ├── Launch/           # 参数组装、进程启动、准备编排
-│   │   ├── Profiles/         # 设置 / 账号 / 档案持久化
-│   │   └── Utils/            # 路径、哈希、JSON 等工具
-│   └── RCL.UI/               # Avalonia 界面（主窗口 / 登录对话框 / 视图模型）
-└── tools/Test/               # 核心逻辑离线验证小程序（可选）
+│   ├── RCL.Core/                 # 核心库（与平台无关，开源）
+│   │   ├── Auth/                 # 微软认证（设备码 / Xbox / XSTS / Minecraft）
+│   │   ├── Versions/             # 版本清单、版本 JSON 解析、inheritsFrom 合并
+│   │   ├── Download/             # 并行下载器（带进度、重试、SHA1 校验）
+│   │   ├── Libraries/            # 依赖库筛选、classpath、natives 解压
+│   │   ├── Assets/               # 资产索引与对象下载、legacy 虚拟资产
+│   │   ├── Java/                 # 本机 Java 检测、Temurin 下载
+│   │   ├── ModLoaders/           # Fabric / Forge / Quilt 安装器
+│   │   ├── Launch/               # 参数组装、进程启动、准备编排
+│   │   ├── Modules/              # 闭源模块契约 IPaidModule 与加载器（开源接口层）
+│   │   ├── Licensing/            # 授权校验（RCL- / RCM- 离线 HMAC 校验）
+│   │   ├── Profiles/             # 设置 / 账号 / 档案持久化
+│   │   └── Utils/                # 路径、哈希、JSON 等工具
+│   ├── RCL.UI/                   # Avalonia 界面（主窗口 / 登录对话框 / 视图模型，开源）
+│   └── RCL.Paid/                 # 闭源进阶模块（联机/内网穿透/一键开服，源码不公开，gitignored）
+└── tools/Test/                   # 核心逻辑离线验证小程序（可选）
 ```
 
 ---

@@ -14,6 +14,11 @@ publish-folder/
 # ===== 签名私钥与证书：绝不提交 =====
 tools/cert/
 
+# ===== 闭源付费模块（源码不进公开仓库；仅以 RCL.Paid.dll 形式随发布包提供）=====
+src/RCL.Paid/
+RCL.Paid.dll
+RCL.Paid.pdb
+
 # ===== Python 缓存 =====
 __pycache__/
 *.pyc
@@ -37,3 +42,6 @@ crash.log
 core
 core.*
 *.core
+
+# 闭源模块构建产物（含签名 DLL，不入库）
+dist-paid/

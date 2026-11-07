@@ -17,6 +17,7 @@ using RCL.Core.Launch;
 using RCL.Core.Licensing;
 using RCL.Core.Models;
 using RCL.Core.ModLoaders;
+using RCL.Core.Modules;
 using RCL.Core.Profiles;
 using RCL.Core.Utils;
 using RCL.UI.ViewModels;
@@ -357,8 +358,7 @@ public partial class MainWindow : Window
             await OpenActivationAsync(true);
             if (!ModulesLicenseManager.IsActivated) return;
         }
-        var w = new NetworkWindow(_vm);
-        await w.ShowDialog(this);
+        if (!await OpenPaidAsync("network")) return;
     }
 
     private async Task OpenFrpcAsync()
@@ -368,8 +368,7 @@ public partial class MainWindow : Window
             await OpenActivationAsync(true);
             if (!ModulesLicenseManager.IsActivated) return;
         }
-        var w = new FrpcWindow(_vm);
-        await w.ShowDialog(this);
+        if (!await OpenPaidAsync("frpc")) return;
     }
 
     private async Task OpenServerAsync()
@@ -379,8 +378,24 @@ public partial class MainWindow : Window
             await OpenActivationAsync(true);
             if (!ModulesLicenseManager.IsActivated) return;
         }
-        var w = new ServerWindow(_vm);
-        await w.ShowDialog(this);
+        if (!await OpenPaidAsync("server")) return;
+    }
+
+    /// <summary>
+    /// 通过闭源加载器打开付费模块。组件缺失（社区版）时优雅降级提示。
+    /// </summary>
+    private async Task<bool> OpenPaidAsync(string id)
+    {
+        var m = PaidModuleLoader.Get(id);
+        if (m == null)
+        {
+            await Dialogs.ShowInfoAsync(this, "未安装进阶模块",
+                "进阶模块组件（RCL.Paid.dll）未随本启动器提供。\n\n请获取包含联机 / 内网穿透 / 一键开服的完整版。");
+            return false;
+        }
+        m.AttachContext(this, _vm);
+        await m.OpenAsync();
+        return true;
     }
 
     // ---------------------------------------------------------------- 模组
