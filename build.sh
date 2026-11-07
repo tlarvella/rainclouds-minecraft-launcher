@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # 跨平台发布脚本（在 Windows 上请用 build.bat）。
-# 本脚本用于在 Linux/macOS 交叉发布 Windows 版 rcl.exe（社区版 v1.2）。
+# 本脚本用于在 Linux/macOS 交叉发布 Windows 版 rcl.exe（社区版）。
 set -e
 cd "$(dirname "$0")"
 
+VERSION="1.3.0.0"
 PUBLISH_OUT="dist"
 EXE="$PUBLISH_OUT/rcl.exe"
 
@@ -30,7 +31,7 @@ PY
 # 3) 注入 VS_VERSION_INFO 版本资源（版权、产品名、版本号）。
 #    因为交叉编译时 dotnet 无法自定义 apphost 版本资源（NETSDK1074），
 #    这里用 pefile 重建 .rsrc 段。
-python3 tools/pe_set_version.py "$PWD/$EXE"
+python3 tools/pe_set_version.py "$PWD/$EXE" --filever "$VERSION" --prodver "$VERSION"
 
 # 4) 生成自签名证书（仅演示用），并用 osslsigncode 进行 Authenticode 数字签名。
 #    证书只在第一次构建时生成，之后复用，保证签名一致。

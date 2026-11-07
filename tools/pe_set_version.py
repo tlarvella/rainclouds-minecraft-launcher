@@ -189,6 +189,8 @@ if __name__ == "__main__":
     copyright = "Copyright © Rainclouds"
     product = "Rainclouds Minecraft Launcher 社区版"
     desc = "Rainclouds Minecraft Launcher"
+    filever = (1, 2, 0, 0)
+    prodver = (1, 2, 0, 0)
     i = 1
     while i < len(args):
         a = args[i]
@@ -200,6 +202,10 @@ if __name__ == "__main__":
             product = args[i + 1]; i += 2
         elif a == "--desc":
             desc = args[i + 1]; i += 2
+        elif a == "--filever":
+            filever = tuple(int(x) for x in args[i + 1].split(".")); i += 2
+        elif a == "--prodver":
+            prodver = tuple(int(x) for x in args[i + 1].split(".")); i += 2
         else:
             i += 1
-    patch(exe, company, copyright, product, desc)
+    patch(exe, company, copyright, product, desc, filever, prodver)
