@@ -2,33 +2,42 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="RCL.UI.Views.SplashWindow"
         Width="460" Height="300" CanResize="False"
-        WindowStartupLocation="CenterScreen" SystemDecorations="None"
-        Background="#14161c">
-  <Grid RowDefinitions="*,Auto,Auto,Auto">
-    <!-- 品牌区 -->
-    <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="14">
-      <Border Width="76" Height="76" CornerRadius="20" Background="#1f6feb">
-        <TextBlock Text="&#9729;" FontSize="42" Foreground="White"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-      </Border>
-      <StackPanel Spacing="4" HorizontalAlignment="Center">
-        <TextBlock Text="Rainclouds Minecraft Launcher" FontSize="20" FontWeight="Bold"
-                   Foreground="#ffffff" HorizontalAlignment="Center"/>
-        <TextBlock Text="社区版" FontSize="13" Foreground="#7ea6ff" HorizontalAlignment="Center"/>
+        WindowStartupLocation="CenterScreen" SystemDecorations="None">
+  <Grid x:Name="RootGrid">
+    <!-- 自定义壁纸时的压暗遮罩，保证文字可读（默认隐藏） -->
+    <Border x:Name="DimLayer" Background="#99090b10" IsVisible="False"/>
+
+    <Grid RowDefinitions="*,Auto,Auto,Auto">
+      <!-- 品牌区 -->
+      <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="14">
+        <Border Width="76" Height="76" CornerRadius="20" Background="#1f6feb">
+          <TextBlock Text="&#9729;" FontSize="42" Foreground="White"
+                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <StackPanel Spacing="4" HorizontalAlignment="Center">
+          <TextBlock Text="Rainclouds Minecraft Launcher" FontSize="20" FontWeight="Bold"
+                     Foreground="#ffffff" HorizontalAlignment="Center"/>
+          <TextBlock Text="社区版" FontSize="13" Foreground="#7ea6ff" HorizontalAlignment="Center"/>
+        </StackPanel>
       </StackPanel>
-    </StackPanel>
 
-    <!-- 进度条 -->
-    <ProgressBar Grid.Row="1" x:Name="ProgBar" Minimum="0" Maximum="100" Height="4"
-                 Width="320" Value="0" Foreground="#1f6feb" Background="#23262f"
-                 HorizontalAlignment="Center" Margin="0,0,0,10"/>
+      <!-- 进度条 -->
+      <ProgressBar Grid.Row="1" x:Name="ProgBar" Minimum="0" Maximum="100" Height="4"
+                   Width="320" Value="0" Foreground="#1f6feb" Background="#23262f"
+                   HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
-    <!-- 状态文案 -->
-    <TextBlock Grid.Row="2" x:Name="TxtStatus" Text="正在初始化..." FontSize="11"
-               Foreground="#9aa3b2" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+      <!-- 状态文案 + 随机启动名言（来自内嵌离线资源） -->
+      <StackPanel Grid.Row="2" Spacing="6" Margin="0,0,0,12">
+        <TextBlock x:Name="TxtStatus" Text="正在初始化..." FontSize="11"
+                   Foreground="#9aa3b2" HorizontalAlignment="Center" Margin="0"/>
+        <TextBlock x:Name="TxtQuote" Text="" FontSize="10.5" Foreground="#7ea6ff"
+                   HorizontalAlignment="Center" TextAlignment="Center"
+                   TextWrapping="Wrap" MaxWidth="400" Margin="24,0,24,0"/>
+      </StackPanel>
 
-    <!-- 版权 -->
-    <TextBlock Grid.Row="3" Text="Copyright © Rainclouds" FontSize="10" Foreground="#5b6472"
-               HorizontalAlignment="Center" Margin="0,0,0,14"/>
+      <!-- 版权 -->
+      <TextBlock Grid.Row="3" Text="Copyright © Rainclouds" FontSize="10" Foreground="#5b6472"
+                 HorizontalAlignment="Center" Margin="0,0,0,14"/>
+    </Grid>
   </Grid>
 </Window>

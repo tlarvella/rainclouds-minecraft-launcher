@@ -9,7 +9,8 @@
     <!-- ================= 顶栏 ================= -->
     <Border DockPanel.Dock="Top" Background="#14161c" Padding="16,10">
       <Grid ColumnDefinitions="Auto,*,Auto,12,Auto,12,Auto">
-        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+        <StackPanel Grid.Column="0" x:Name="BrandBox" Orientation="Horizontal" Spacing="10"
+                    Background="Transparent" ToolTip.Tip="Rainclouds 社区版">
           <Border Width="30" Height="30" CornerRadius="9" Background="#1f6feb">
             <TextBlock Text="&#9729;" FontSize="17" Foreground="White"
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -17,7 +18,7 @@
           <TextBlock Text="Rainclouds" FontSize="17" FontWeight="Bold" Foreground="#ffffff"
                      VerticalAlignment="Center"/>
           <Border Background="#23262f" CornerRadius="5" Padding="6,2" VerticalAlignment="Center">
-            <TextBlock Text="社区版 v1.2" FontSize="10" Foreground="#9aa3b2"/>
+            <TextBlock Text="社区版 v1.4" FontSize="10" Foreground="#9aa3b2"/>
           </Border>
         </StackPanel>
 

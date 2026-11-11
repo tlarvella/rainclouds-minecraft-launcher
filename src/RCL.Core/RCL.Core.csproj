@@ -17,4 +17,13 @@
     <EmbeddedResource Include="Resources\rainclouds-spawn.jar" />
   </ItemGroup>
 
+  <!-- 内嵌「离线资料馆 / 彩蛋」资源包：像素风壁纸、无损音效、离线资料。
+       这些资源随单文件 exe 一起发布，离线可用；由 tools/gen_extras.py 生成。 -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Extras\index.json" />
+    <EmbeddedResource Include="Resources\Extras\wallpapers\*.png" />
+    <EmbeddedResource Include="Resources\Extras\audio\*.wav" />
+    <EmbeddedResource Include="Resources\Extras\data\*" />
+  </ItemGroup>
+
 </Project>

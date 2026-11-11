@@ -1,0 +1,51 @@
+{
+  "项目": "Rainclouds Minecraft Launcher 社区版",
+  "versions": [
+    {
+      "tag": "v1.0.2",
+      "date": "2026-10-31",
+      "title": "首个公开发布",
+      "changes": [
+        "微软正版登录 / 离线账号",
+        "版本清单、依赖库、资产、Java 自动准备",
+        "Fabric / Forge / Quilt 加载器安装",
+        "实例隔离、模组管理、并行下载"
+      ]
+    },
+    {
+      "tag": "v1.2.0",
+      "date": "2026-11-01",
+      "title": "自研 10yv 核心",
+      "changes": [
+        "内置 Rainclouds 自研核心（同时支持 Mod 与插件）",
+        "启动页 Splash、PE 版本资源与 Authenticode 数字签名",
+        "版权信息 Copyright © Rainclouds",
+        "新增联机 / 内网穿透 / 一键开服三个进阶模块",
+        "修复 classpath 注入顺序导致核心主类无法加载的问题"
+      ]
+    },
+    {
+      "tag": "v1.3.0",
+      "date": "2026-11-08",
+      "title": "开源 / 闭源分离（Open-Core）",
+      "changes": [
+        "付费模块源码移出公开仓库，改为闭源 RCL.Paid.dll 运行时加载",
+        "新增 IPaidModule 契约与 PaidModuleLoader，DLL 缺失时优雅降级",
+        "新增 build-closed.sh 构建签名闭源 DLL",
+        "构建脚本版本号随 csproj 自动同步"
+      ]
+    },
+    {
+      "tag": "v1.4.0",
+      "date": "2026-11-11",
+      "title": "离线资料馆与彩蛋",
+      "changes": [
+        "内置 6 张像素风壁纸、6 个无损音效、6 份离线资料，全部随 exe 嵌入发布",
+        "新增彩蛋馆：壁纸预览 / 音效试听 / 资料速查 / 隐藏挖矿小游戏",
+        "Konami 码或连点顶栏 logo 7 次可开启彩蛋馆",
+        "启动页随机名言，支持把任意内置壁纸设为启动页背景",
+        "资源可一键导出到磁盘，离线可用"
+      ]
+    }
+  ]
+}

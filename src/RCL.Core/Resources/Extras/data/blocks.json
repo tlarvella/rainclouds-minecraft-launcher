@@ -1,0 +1,239 @@
+{
+  "说明": "常见方块图鉴：hardness 为硬度，luminance 为发光等级(0-15)，flammable 是否可燃。",
+  "blocks": [
+    {
+      "id": "stone",
+      "name": "石头",
+      "hardness": 1.5,
+      "tool": "镐",
+      "drop": "圆石",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "cobblestone",
+      "name": "圆石",
+      "hardness": 2.0,
+      "tool": "镐",
+      "drop": "圆石",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "dirt",
+      "name": "泥土",
+      "hardness": 0.5,
+      "tool": "锹",
+      "drop": "泥土",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "grass_block",
+      "name": "草方块",
+      "hardness": 0.6,
+      "tool": "锹",
+      "drop": "泥土",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "oak_log",
+      "name": "橡木原木",
+      "hardness": 2.0,
+      "tool": "斧",
+      "drop": "橡木原木",
+      "luminance": 0,
+      "flammable": true
+    },
+    {
+      "id": "oak_planks",
+      "name": "橡木木板",
+      "hardness": 2.0,
+      "tool": "斧",
+      "drop": "橡木木板",
+      "luminance": 0,
+      "flammable": true
+    },
+    {
+      "id": "sand",
+      "name": "沙子",
+      "hardness": 0.5,
+      "tool": "锹",
+      "drop": "沙子",
+      "luminance": 0,
+      "flammable": false,
+      "note": "受重力影响，无支撑会下落"
+    },
+    {
+      "id": "gravel",
+      "name": "砂砾",
+      "hardness": 0.6,
+      "tool": "锹",
+      "drop": "砂砾或燧石",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "glass",
+      "name": "玻璃",
+      "hardness": 0.3,
+      "tool": "无",
+      "drop": "无（精准采集可得）",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "glowstone",
+      "name": "萤石",
+      "hardness": 0.3,
+      "tool": "无",
+      "drop": "萤石粉 2-4",
+      "luminance": 15,
+      "flammable": false
+    },
+    {
+      "id": "torch",
+      "name": "火把",
+      "hardness": 0.0,
+      "tool": "无",
+      "drop": "火把",
+      "luminance": 14,
+      "flammable": false,
+      "note": "光照 14，可防止怪物在附近生成"
+    },
+    {
+      "id": "lantern",
+      "name": "灯笼",
+      "hardness": 3.5,
+      "tool": "镐",
+      "drop": "灯笼",
+      "luminance": 15,
+      "flammable": false
+    },
+    {
+      "id": "coal_ore",
+      "name": "煤矿石",
+      "hardness": 3.0,
+      "tool": "镐",
+      "drop": "煤 1（时运可翻倍）",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "iron_ore",
+      "name": "铁矿石",
+      "hardness": 3.0,
+      "tool": "石镐+",
+      "drop": "粗铁",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "gold_ore",
+      "name": "金矿石",
+      "hardness": 3.0,
+      "tool": "铁镐+",
+      "drop": "粗金",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "diamond_ore",
+      "name": "钻石矿石",
+      "hardness": 3.0,
+      "tool": "铁镐+",
+      "drop": "钻石 1",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "redstone_ore",
+      "name": "红石矿石",
+      "hardness": 3.0,
+      "tool": "铁镐+",
+      "drop": "红石粉 4-5",
+      "luminance": 0,
+      "flammable": false,
+      "note": "被踩踏或点击时会短暂发出 9 级红石信号"
+    },
+    {
+      "id": "obsidian",
+      "name": "黑曜石",
+      "hardness": 50.0,
+      "tool": "钻石镐+",
+      "drop": "黑曜石",
+      "luminance": 0,
+      "flammable": false,
+      "note": "需钻石镐，约 8.3 秒；水+岩浆源可生成"
+    },
+    {
+      "id": "netherrack",
+      "name": "下界岩",
+      "hardness": 0.4,
+      "tool": "镐",
+      "drop": "下界岩",
+      "luminance": 0,
+      "flammable": false,
+      "note": "顶部火焰可永久燃烧"
+    },
+    {
+      "id": "magma_block",
+      "name": "岩浆块",
+      "hardness": 0.5,
+      "tool": "镐",
+      "drop": "岩浆块",
+      "luminance": 3,
+      "flammable": false,
+      "note": "站上去会持续受伤"
+    },
+    {
+      "id": "end_stone",
+      "name": "末地石",
+      "hardness": 3.0,
+      "tool": "镐",
+      "drop": "末地石",
+      "luminance": 0,
+      "flammable": false
+    },
+    {
+      "id": "chest",
+      "name": "箱子",
+      "hardness": 2.5,
+      "tool": "斧",
+      "drop": "箱子",
+      "luminance": 0,
+      "flammable": false,
+      "note": "相邻两个箱子会合并为大箱子（27×2 格）"
+    },
+    {
+      "id": "crafting_table",
+      "name": "工作台",
+      "hardness": 2.5,
+      "tool": "斧",
+      "drop": "工作台",
+      "luminance": 0,
+      "flammable": true
+    },
+    {
+      "id": "furnace",
+      "name": "熔炉",
+      "hardness": 3.5,
+      "tool": "镐",
+      "drop": "熔炉",
+      "luminance": 0,
+      "flammable": false,
+      "note": "工作时发光 13"
+    },
+    {
+      "id": "bookshelf",
+      "name": "书架",
+      "hardness": 1.5,
+      "tool": "斧",
+      "drop": "书 3",
+      "luminance": 0,
+      "flammable": true,
+      "note": "附魔台周围每格书架提升可用附魔等级，最多 15 个"
+    }
+  ]
+}

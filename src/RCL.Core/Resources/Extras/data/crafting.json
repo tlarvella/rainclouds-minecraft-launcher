@@ -1,0 +1,343 @@
+{
+  "说明": "离线合成表速查：materials 为材料与数量，pattern 为工作台 3x3 摆位（. 表示空）。",
+  "recipes": [
+    {
+      "name": "工作台",
+      "result": "crafting_table x1",
+      "materials": {
+        "橡木木板": 4
+      },
+      "pattern": [
+        "##.",
+        "##.",
+        "..."
+      ],
+      "legend": {
+        "#": "木板"
+      }
+    },
+    {
+      "name": "熔炉",
+      "result": "furnace x1",
+      "materials": {
+        "圆石": 8
+      },
+      "pattern": [
+        "###",
+        "#.#",
+        "###"
+      ],
+      "legend": {
+        "#": "圆石"
+      }
+    },
+    {
+      "name": "箱子",
+      "result": "chest x1",
+      "materials": {
+        "木板": 8
+      },
+      "pattern": [
+        "###",
+        "#.#",
+        "###"
+      ],
+      "legend": {
+        "#": "木板"
+      }
+    },
+    {
+      "name": "火把",
+      "result": "torch x4",
+      "materials": {
+        "煤/木炭": 1,
+        "木棍": 1
+      },
+      "pattern": [
+        "#..",
+        "S..",
+        "..."
+      ],
+      "legend": {
+        "#": "煤",
+        "S": "木棍"
+      }
+    },
+    {
+      "name": "木棍",
+      "result": "stick x4",
+      "materials": {
+        "木板": 2
+      },
+      "pattern": [
+        "#..",
+        "#..",
+        "..."
+      ],
+      "legend": {
+        "#": "木板"
+      }
+    },
+    {
+      "name": "木镐",
+      "result": "wooden_pickaxe x1",
+      "materials": {
+        "木板": 3,
+        "木棍": 2
+      },
+      "pattern": [
+        "###",
+        ".S.",
+        ".S."
+      ],
+      "legend": {
+        "#": "木板",
+        "S": "木棍"
+      }
+    },
+    {
+      "name": "石镐",
+      "result": "stone_pickaxe x1",
+      "materials": {
+        "圆石": 3,
+        "木棍": 2
+      },
+      "pattern": [
+        "###",
+        ".S.",
+        ".S."
+      ],
+      "legend": {
+        "#": "圆石",
+        "S": "木棍"
+      }
+    },
+    {
+      "name": "铁镐",
+      "result": "iron_pickaxe x1",
+      "materials": {
+        "铁锭": 3,
+        "木棍": 2
+      },
+      "pattern": [
+        "###",
+        ".S.",
+        ".S."
+      ],
+      "legend": {
+        "#": "铁锭",
+        "S": "木棍"
+      }
+    },
+    {
+      "name": "钻石镐",
+      "result": "diamond_pickaxe x1",
+      "materials": {
+        "钻石": 3,
+        "木棍": 2
+      },
+      "pattern": [
+        "###",
+        ".S.",
+        ".S."
+      ],
+      "legend": {
+        "#": "钻石",
+        "S": "木棍"
+      }
+    },
+    {
+      "name": "铁剑",
+      "result": "iron_sword x1",
+      "materials": {
+        "铁锭": 2,
+        "木棍": 1
+      },
+      "pattern": [
+        "#..",
+        "#..",
+        "S.."
+      ],
+      "legend": {
+        "#": "铁锭",
+        "S": "木棍"
+      }
+    },
+    {
+      "name": "铁盔甲（头盔）",
+      "result": "iron_helmet x1",
+      "materials": {
+        "铁锭": 5
+      },
+      "pattern": [
+        "###",
+        "#.#",
+        "..."
+      ],
+      "legend": {
+        "#": "铁锭"
+      }
+    },
+    {
+      "name": "铁盔甲（胸甲）",
+      "result": "iron_chestplate x1",
+      "materials": {
+        "铁锭": 8
+      },
+      "pattern": [
+        "#.#",
+        "###",
+        "###"
+      ],
+      "legend": {
+        "#": "铁锭"
+      }
+    },
+    {
+      "name": "盾牌",
+      "result": "shield x1",
+      "materials": {
+        "木板": 6,
+        "铁锭": 1
+      },
+      "pattern": [
+        "#S#",
+        "###",
+        ".#."
+      ],
+      "legend": {
+        "#": "木板",
+        "S": "铁锭"
+      }
+    },
+    {
+      "name": "熔炼（铁锭）",
+      "result": "iron_ingot x1",
+      "materials": {
+        "铁矿石": 1,
+        "燃料": 1
+      },
+      "pattern": [
+        "熔炉",
+        "上方放矿石，下方放煤/木炭",
+        "每份燃料可熔炼 8 个"
+      ]
+    },
+    {
+      "name": "附魔台",
+      "result": "enchanting_table x1",
+      "materials": {
+        "书": 1,
+        "钻石": 2,
+        "黑曜石": 4
+      },
+      "pattern": [
+        "B..",
+        "DD.",
+        "OOO"
+      ],
+      "legend": {
+        "B": "书",
+        "D": "钻石",
+        "O": "黑曜石"
+      }
+    },
+    {
+      "name": "酿造台",
+      "result": "brewing_stand x1",
+      "materials": {
+        "烈焰棒": 1,
+        "圆石": 3
+      },
+      "pattern": [
+        "...",
+        ".B.",
+        "CCC"
+      ],
+      "legend": {
+        "B": "烈焰棒",
+        "C": "圆石"
+      }
+    },
+    {
+      "name": "末影箱",
+      "result": "ender_chest x1",
+      "materials": {
+        "黑曜石": 8,
+        "末影之眼": 1
+      },
+      "pattern": [
+        "OOO",
+        "OEO",
+        "OOO"
+      ],
+      "legend": {
+        "O": "黑曜石",
+        "E": "末影之眼"
+      }
+    },
+    {
+      "name": "信标底座",
+      "result": "beacon x1",
+      "materials": {
+        "黑曜石": 3,
+        "玻璃": 5,
+        "下界之星": 1
+      },
+      "pattern": [
+        "GGG",
+        "GSG",
+        "OOO"
+      ],
+      "legend": {
+        "G": "玻璃",
+        "S": "下界之星",
+        "O": "黑曜石"
+      }
+    },
+    {
+      "name": "红石中继器",
+      "result": "repeater x1",
+      "materials": {
+        "红石粉": 1,
+        "圆石": 3,
+        "木棍": 2
+      },
+      "pattern": [
+        "S.S",
+        "###",
+        "..."
+      ],
+      "legend": {
+        "S": "木棍",
+        "#": "圆石（中间格加红石粉）"
+      }
+    },
+    {
+      "name": "活塞",
+      "result": "piston x1",
+      "materials": {
+        "木板": 3,
+        "圆石": 4,
+        "铁锭": 1,
+        "红石粉": 1
+      },
+      "pattern": [
+        "PPP",
+        "CIC",
+        "CRC"
+      ],
+      "legend": {
+        "P": "木板",
+        "C": "圆石",
+        "I": "铁锭",
+        "R": "红石粉"
+      }
+    }
+  ],
+  "小贴士": [
+    "木镐只能挖石头与煤；铁镐起可挖铁、青金石、红石、钻石需铁镐及以上。",
+    "钻石矿最佳层数在 Y=-59 附近（1.18+），记得带水桶应对岩浆。",
+    "时运 III 附魔可让钻石矿掉落最多 4 颗钻石。"
+  ]
+}

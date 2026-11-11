@@ -1,0 +1,102 @@
+{
+  "version": "1.4.0",
+  "generated": "2026-11-11 13:51:59",
+  "generator": "tools/gen_extras.py",
+  "note": "全部资源随 rcl.exe 嵌入发布，离线可用；PNG/WAV 为高熵媒体，实打实增加启动器体积。",
+  "wallpapers": [
+    {
+      "file": "morning_meadow.png",
+      "title": "晨曦草原",
+      "desc": "日出时的草原与橡树，方格地形、云层与远处花点。"
+    },
+    {
+      "file": "raincloud_night.png",
+      "title": "雨云之夜",
+      "desc": "Rainclouds 主题：深蓝雨夜、斜落雨丝、水洼反光与山影。"
+    },
+    {
+      "file": "deep_cave.png",
+      "title": "地底矿洞",
+      "desc": "分层岩壁与钻石 / 红石 / 金 / 煤矿脉，底部岩浆与火把。"
+    },
+    {
+      "file": "nether_fortress.png",
+      "title": "下界要塞",
+      "desc": "岩浆海、黑石拱门、悬浮灰烬与火焰粒子。"
+    },
+    {
+      "file": "end_island.png",
+      "title": "末地之岛",
+      "desc": "紫色星空、末地石浮岛、黑曜石柱与末影水晶。"
+    },
+    {
+      "file": "flower_forest.png",
+      "title": "繁花森林",
+      "desc": "明亮白昼、成片彩色花朵、树冠与飞舞的蜜蜂蝴蝶。"
+    }
+  ],
+  "audio": [
+    {
+      "file": "startup.wav",
+      "title": "启动音",
+      "desc": "C 大调上行琶音，8-bit 方波音色。"
+    },
+    {
+      "file": "levelup.wav",
+      "title": "升级提示",
+      "desc": "五声音阶上行 + 铃音尾奏。"
+    },
+    {
+      "file": "diamond.wav",
+      "title": "发现钻石",
+      "desc": "两声清脆叮咚，带泛音尾巴。"
+    },
+    {
+      "file": "rain.wav",
+      "title": "雨声氛围",
+      "desc": "10 秒滤波白噪雨幕，含远处闷雷与零星雨滴。"
+    },
+    {
+      "file": "cave_ambience.wav",
+      "title": "洞穴氛围",
+      "desc": "10 秒低频 drone、风声与随机滴水。"
+    },
+    {
+      "file": "secret.wav",
+      "title": "隐藏旋律",
+      "desc": "Rainclouds 原创 8 小节 8-bit 小旋律。"
+    }
+  ],
+  "data": [
+    {
+      "file": "crafting.json",
+      "title": "合成表速查",
+      "desc": "常用物品的材料与摆位，离线可查。"
+    },
+    {
+      "file": "blocks.json",
+      "title": "方块图鉴",
+      "desc": "常见方块的硬度、掉落、亮度与可燃性。"
+    },
+    {
+      "file": "quotes.txt",
+      "title": "启动名言",
+      "desc": "Minecraft 经典语录与 Rainclouds 原创短句。"
+    },
+    {
+      "file": "version_history.json",
+      "title": "版本编年史",
+      "desc": "Rainclouds 启动器从 v1.0 到 v1.4 的更新记录。"
+    },
+    {
+      "file": "fieldguide.md",
+      "title": "离线生存手册",
+      "desc": "红石、附魔、生物群系、命令与启动器技巧速查。"
+    },
+    {
+      "file": "credits.txt",
+      "title": "鸣谢与许可",
+      "desc": "项目致谢、开源组件与彩蛋说明。"
+    }
+  ]
+}

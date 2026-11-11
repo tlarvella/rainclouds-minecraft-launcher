@@ -4,7 +4,10 @@
 set -e
 cd "$(dirname "$0")"
 
-VERSION="1.3.0.0"
+# 版本号直接从 csproj 读取，避免每次发新版时漏改
+VERSION="$(sed -n 's/.*<Version>\([^<]*\)<\/Version>.*/\1/p' src/RCL.UI/RCL.UI.csproj | head -1)"
+[ -z "$VERSION" ] && VERSION="1.4.0.0"
+echo "构建版本: $VERSION"
 PUBLISH_OUT="dist"
 EXE="$PUBLISH_OUT/rcl.exe"
 

@@ -6,12 +6,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using RCL.Core.Accounts;
 using RCL.Core.Content;
+using RCL.Core.Extras;
 using RCL.Core.Java;
 using RCL.Core.Launch;
 using RCL.Core.Licensing;
@@ -30,12 +32,19 @@ public partial class MainWindow : Window
     private CancellationTokenSource? _playCts;
     private bool _suppressSelection;
 
+    // 彩蛋触发：Konami 码（↑↑↓↓←→←→ B A）或连点顶栏品牌区 7 次
+    private readonly KonamiCode _konami = new();
+    private int _brandClicks;
+    private DateTime _lastBrandClick;
+
     public MainWindow()
     {
         InitializeComponent();
         DataContext = _vm;
 
         Loaded += OnLoaded;
+        BrandBox.PointerPressed += OnBrandPressed;
+        KeyDown += OnMainWindowKeyDown;
 
         LstProfiles.SelectionChanged += (_, _) =>
         {
@@ -626,5 +635,38 @@ public partial class MainWindow : Window
             _vm.IsBusy = false;
             BtnPlay.IsEnabled = true;
         }
+    }
+
+    // ---------------------------------------------------------------- 彩蛋
+
+    private void OnMainWindowKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (_konami.Feed(e.Key.ToString()))
+            _ = OpenEasterEggsAsync();
+    }
+
+    private void OnBrandPressed(object? sender, PointerPressedEventArgs e)
+    {
+        // 1.5 秒内的连续点击才算数，避免误触
+        var now = DateTime.UtcNow;
+        if ((now - _lastBrandClick).TotalSeconds > 1.5)
+            _brandClicks = 0;
+        _lastBrandClick = now;
+        _brandClicks++;
+
+        if (_brandClicks == 4)
+            _vm.AddLog("……好像有什么东西被点醒了，再试试？");
+        if (_brandClicks >= 7)
+        {
+            _brandClicks = 0;
+            _ = OpenEasterEggsAsync();
+        }
+    }
+
+    private async Task OpenEasterEggsAsync()
+    {
+        _vm.AddLog("彩蛋已开启：Rainclouds 离线资料馆（全部资源离线可用）");
+        var w = new EasterEggWindow();
+        await w.ShowDialog(this);
     }
 }
